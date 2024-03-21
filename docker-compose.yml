@@ -3,12 +3,10 @@ services:
   prometheus_server:
     image: prom/prometheus:v2.30.3
     volumes:
-    - type: volume
-      source: prometheus_data
-      target: /prometheus
-    - ./prometheus:/etc/prometheus
+      - prometheus_data:/prometheus
+      - ./prometheus:/etc/prometheus
     ports:
-    - 9090:9090
+      - 9090:9090
     privileged: true
     networks:
       static:
@@ -17,20 +15,16 @@ services:
   grafana_server:
     image: grafana/grafana:9.5.12
     volumes:
-    - type: volume
-      source: grafana_configuration
-      target: /etc/grafana
-    - type: volume
-      source: grafana_data
-      target: /var/lib/grafana
+      - grafana_configuration:/etc/grafana
+      - grafana_data:/var/lib/grafana
     ports:
-    - 3000:3000
+      - 3000:3000
     privileged: true
 
   vmware_exporter:
     image: pryorda/vmware_exporter:v0.18.4
     ports:
-    - 9272:9272
+      - 9272:9272
     environment:
       - VSPHERE_HOST=192.168.1.10
       - VSPHERE_USER=administrator@vcenter.local
