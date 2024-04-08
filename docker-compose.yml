@@ -17,12 +17,8 @@ services:
   grafana_server:
     image: grafana/grafana:9.5.12
     volumes:
-    - type: volume
-      source: grafana_configuration
-      target: /etc/grafana
-    - type: volume
-      source: grafana_data
-      target: /var/lib/grafana
+    - grafana_configuration:/etc/grafana
+    - grafana_data:/var/lib/grafana
     - ./grafana/dashboards:/var/lib/grafana/dashboards
     - ./grafana/dashboard.yaml:/etc/grafana/provisioning/dashboards/main.yaml
     - ./grafana/datasources:/etc/grafana/provisioning/datasources
